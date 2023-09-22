@@ -26,37 +26,29 @@ export class News extends Component {
     }
   }
 
-  async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d449557f508746e99e44a70d86d2237f&page=1&pageSize=${this.props.pageSize}`;
+  async updateNews() {
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d449557f508746e99e44a70d86d2237f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({ articles: parsedData.articles, totalResults: parsedData.totalResults, loading: false });
   }
 
+  async componentDidMount() {
+    this.updateNews();
+  }
+
   handleNextClick = async () => {
-    if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize))) {
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d449557f508746e99e44a70d86d2237f&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
-      this.setState({ loading: true });
-      let data = await fetch(url);
-      let parsedData = await data.json();
-      this.setState({
-        articles: parsedData.articles,
-        page: this.state.page + 1,
-        loading: false
-      });
-    }
+    this.updateNews();
+    this.setState({
+      page: this.state.page + 1
+    });
   }
 
   handlePrevClick = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d449557f508746e99e44a70d86d2237f&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-    this.setState({ loading: true });
-    let data = await fetch(url);
-    let parsedData = await data.json();
+    this.updateNews();
     this.setState({
-      articles: parsedData.articles,
-      page: this.state.page - 1,
-      loading: false
+      page: this.state.page - 1
     });
   }
 
@@ -75,8 +67,8 @@ export class News extends Component {
                 imageUrl={urlToImage ? urlToImage : "https://react.semantic-ui.com/images/wireframe/image.png"}
                 newsUrl={url}
                 author={author ? author : "unknown"}
-                time={publishedAt ? publishedAt : "unknown"} 
-                source={source.name}/>
+                time={publishedAt ? publishedAt : "unknown"}
+                source={source.name} />
             </div>
           })}
 
