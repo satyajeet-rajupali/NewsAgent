@@ -66,10 +66,17 @@ export class News extends Component {
         <h2 className=''>NewsAgent - Top Headlines</h2>
         {this.state.loading && <Spinner />}
         <div className='row'>
-          {!this.state.loading && this.state.articles.map(({ title, description, url, urlToImage }) => {
+          {!this.state.loading && this.state.articles.map(({ title, description, url, urlToImage, author, publishedAt, source }) => {
 
             return <div className='col-md-3 mb-3 d-flex align-items-stretch' key={url}>
-              <NewsItem title={title ? title : ""} description={description ? description : ""} imageUrl={urlToImage ? urlToImage : "https://react.semantic-ui.com/images/wireframe/image.png"} newsUrl={url} />
+              <NewsItem
+                title={title ? title : ""}
+                description={description ? description : ""}
+                imageUrl={urlToImage ? urlToImage : "https://react.semantic-ui.com/images/wireframe/image.png"}
+                newsUrl={url}
+                author={author ? author : "unknown"}
+                time={publishedAt ? publishedAt : "unknown"} 
+                source={source.name}/>
             </div>
           })}
 
