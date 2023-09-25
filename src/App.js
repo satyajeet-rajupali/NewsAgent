@@ -11,33 +11,56 @@ import LoadingBar from 'react-top-loading-bar'
 
 const App = () => {
   const apiKey = process.env.REACT_APP_NEWS_API;
+
+  let finalTheme = 'light';
+  if (localStorage.getItem('theme')) {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark')
+      finalTheme = 'dark';
+  }
+
   const [progress, setProgress] = useState(0);
-  const [mode, setMode] = useState(localStorage ? localStorage.getItem('theme') : 'light');
+  const [mode, setMode] = useState(finalTheme);
+
+  const enableLightMode = () => {
+    setMode('light');
+    localStorage.setItem('theme', 'light');
+    document.body.style.backgroundColor = 'white';
+    document.title = "NewsAgent - Light Mode";
+    setTimeout(() => {
+      document.title = "NewsAgent"
+    }, 1500);
+  }
+
+  const enableDarkMode = () => {
+    setMode('dark');
+    localStorage.setItem('theme', 'dark');
+    document.body.style.backgroundColor = 'black';
+    document.title = "NewsAgent - Dark Mode";
+    setTimeout(() => {
+      document.title = "NewsAgent"
+    }, 1500);
+  }
 
   const toggleMode = () => {
     if (mode === 'light') {
-      setMode('dark');
-      localStorage.setItem('theme', 'dark');
-      document.body.style.backgroundColor = 'black';
-      document.title = "NewsAgent - Dark Mode";
-      setTimeout(() => {
-        document.title = "NewsAgent"
-      }, 1500);
+      enableDarkMode();
     } else {
-      setMode('light');
-      localStorage.setItem('theme', 'light');
-      document.body.style.backgroundColor = 'white';
-      document.title = "NewsAgent - Light Mode";
-      setTimeout(() => {
-        document.title = "NewsAgent"
-      }, 1500);
+      enableLightMode();
     }
   }
 
   useEffect(() => {
-    const themm = localStorage ? localStorage.getItem('theme') : 'light';
-    setMode(themm);
-    themm === 'light' ? document.body.style.backgroundColor = 'white' : document.body.style.backgroundColor = 'black';
+    const localTheme = localStorage.getItem('theme');
+    if (localTheme) {
+      if (localTheme === 'dark') {
+        enableDarkMode();
+      } else {
+        enableLightMode();
+      }
+    } else {
+      enableLightMode();
+    }
   }, [mode]);
 
   return (
