@@ -7,7 +7,6 @@ import "./News.css"
 
 const News = (props) => {
 
-
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -35,7 +34,7 @@ const News = (props) => {
   }
 
   useEffect(() => {
-    document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
+    document.title = `NewsAgent - ${capitalizeFirstLetter(props.category)}`;
     updateNews();
     // eslint-disable-next-line
   }, []);
@@ -52,7 +51,7 @@ const News = (props) => {
 
   return (
     <>
-      <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}><strong>NewsAgent - Top {capitalizeFirstLetter(props.category)} Headlines</strong></h1>
+      <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px', color: props.mode === 'light' ? 'black' : 'white' }}><strong>NewsAgent - Top {capitalizeFirstLetter(props.category)} Headlines</strong></h1>
       {loading && <Spinner />}
       <InfiniteScroll
         dataLength={articles.length}
@@ -60,19 +59,20 @@ const News = (props) => {
         hasMore={page <= totalPages}
         loader={<Spinner />}
       >
-        <div className='container'>
+        <div className='container' style={{ background: props.mode === 'light' ? 'white' : 'black' }}>
 
-          <div className='row'>
+          <div className='row' >
             {articles.map((item) => {
               return <div className='col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xll-4 mb-3 d-flex align-items-stretch' key={item.url}>
                 <NewsItem
+                  mode={props.mode}
                   title={item.title ? item.title : ""}
                   description={item.description ? item.description : ""}
                   imageUrl={item.urlToImage ? item.urlToImage : "https://react.semantic-ui.com/images/wireframe/image.png"}
                   newsUrl={item.url}
                   author={item.author ? item.author : "unknown"}
                   time={item.publishedAt ? item.publishedAt : "unknown"}
-                  source={item.source.name? item.source.name: ""} />
+                  source={item.source.name ? item.source.name : ""} />
               </div>
             })}
           </div>
