@@ -36,13 +36,15 @@ export class News extends Component {
   }
 
   async updateNews() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d449557f508746e99e44a70d86d2237f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.props.setProgress(10);
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.props.setProgress(30);
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
+    this.props.setProgress(70);
     this.setState({ articles: parsedData.articles, articlesLength: parsedData.articles.length, totalResults: parsedData.totalResults, totalPages:Math.ceil(parsedData.totalResults/this.props.pageSize), loading: false });
-    console.log("fromComponentDidMount(totalResults)", this.state.totalResults);
-    console.log("fromComponentDidMount(articlesLenght)", this.state.articlesLength);
+    this.props.setProgress(100);
   }
 
   async componentDidMount() {
@@ -64,21 +66,20 @@ export class News extends Component {
   }
 
   fetchMoreData = async () => {
+    
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
     this.setState({
       page: this.state.page + 1
     });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d449557f508746e99e44a70d86d2237f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({ articles: this.state.articles.concat(parsedData.articles), articlesLength: this.state.articlesLength + parsedData.articles.length, totalResults: parsedData.totalResults});
-    console.log("fromComponentDidMount(totalResults)", this.state.totalResults);
-    console.log("fromComponentDidMount(articlesLenght)", this.state.articlesLength);
   };
 
   render() {
     return (
       <>
-        <h1 className="text-center" style={{ margin: '35px 0px' }}>NewsAgent - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
+        <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}>NewsAgent - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
         {this.state.loading && <Spinner/>}
         <InfiniteScroll
           dataLength={this.state.articles.length}
