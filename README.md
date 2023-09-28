@@ -1,14 +1,17 @@
 # NewsAgent
 
-Simple React Shopping Cart
+It’s a comprehensive news website powered by the News API and hosted on Firebase. NewsAgent provides
+users with up-to-date news articles categorized into Business, Entertainment, Health, Science, Sports, and
+Technology sections. This project demonstrates my proficiency in web development, data integration, and
+user-focused content delivery.
 
-[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/phaser-craft.min.js.svg)](https://github.com/satyajeet-rajupali/NewsAgent) [![David](https://img.shields.io/david/expressjs/express.svg)](https://github.com/satyajeet-rajupali/NewsAgent)
+[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/phaser-craft.min.js.svg)](https://github.com/satyajeet-rajupali/NewsAgent)
 
-![React Shopping Cart Preview](https://res.cloudinary.com/sivadass/image/upload/v1494752103/gifs/react-shopping-cart.gif)
+![React NewAgent Preview](https://github.com/satyajeet-rajupali/NewsAgent/blob/main/newsapp.png)
 
 ## Live Demo
 
-[https://sivadass.github.io/react-shopping-cart/](https://sivadass.github.io/react-shopping-cart/)
+[https://github.com/satyajeet-rajupali/NewsAgent]()
 
 ## Setup
 
