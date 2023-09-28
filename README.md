@@ -11,7 +11,7 @@ user-focused content delivery.
 
 ## Live Demo
 
-[https://github.com/satyajeet-rajupali/NewsAgent](https://github.com/satyajeet-rajupali/NewsAgent)
+[https://github.com/satyajeet-rajupali/NewsAgent]([https://github.com/satyajeet-rajupali/NewsAgent](https://newsagent-674b0.web.app/sports))
 
 ## Setup
 
