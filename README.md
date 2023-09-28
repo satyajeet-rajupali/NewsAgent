@@ -7,7 +7,7 @@ user-focused content delivery.
 
 [![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/phaser-craft.min.js.svg)](https://github.com/satyajeet-rajupali/NewsAgent)
 
-<img src="https://github.com/satyajeet-rajupali/NewsAgent/blob/46364e4a1661b010ed8f8c68c788580bcd8dce73/image.png"> 
+![newsapp](https://github.com/satyajeet-rajupali/NewsAgent/assets/66545966/e56d2960-5ba8-4f05-9d47-5c30ce8eb9cb)
 
 ## Live Demo
 
